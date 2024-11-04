@@ -4,7 +4,7 @@
     naersk.url = "github:nix-community/naersk";
   };
 
-  outputs = { nixpkgs, flake-utils, naersk }:
+  outputs = { self, nixpkgs, flake-utils, naersk }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages."${system}";
