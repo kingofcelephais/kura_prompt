@@ -1,6 +1,7 @@
 mod cmds;
 
 use crate::cmds::cwd;
+use crate::cmds::rust;
 
 use nu_ansi_term::Color::*;
 
@@ -17,6 +18,15 @@ fn my_prompt() -> String {
         Some(u) => u,
         None => Red.paint("uname failed").to_string(),
     };
+    let rust = match rust::rust() {
+        Some(r) => r,
+        None => "".to_string(),
+    };
 
-    format!("[{uname}] <-> [{cwd}]", cwd = cwd, uname = uname)
+    format!(
+        "[{uname}] <-> [{cwd}] <-> [{rust}] ",
+        cwd = cwd,
+        uname = uname,
+        rust = rust
+    )
 }
