@@ -1,4 +1,6 @@
-mod cwd;
+mod cmds;
+
+use crate::cmds::cwd;
 
 use nu_ansi_term::Color::*;
 
