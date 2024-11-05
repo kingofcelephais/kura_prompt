@@ -36,13 +36,17 @@ pub fn get_path() -> io::Result<String> {
 
 pub fn rust() -> Option<String> {
     let path = get_path().unwrap_or_default();
-    let contents = fs::read_to_string(path).expect("file error");
+    if path != "" {
+        let contents = fs::read_to_string(path).expect("file error");
 
-    let toml_contents = contents.parse::<Table>().unwrap();
-    let name = toml_contents["package"]["name"].clone();
-    let num = toml_contents["package"]["version"].clone();
+        let toml_contents = contents.parse::<Table>().unwrap();
+        let name = toml_contents["package"]["name"].clone();
+        let num = toml_contents["package"]["version"].clone();
 
-    let fin = name.as_str().unwrap_or_default().to_owned() + " " + num.as_str().unwrap_or_default();
+        let fin =
+            name.as_str().unwrap_or_default().to_owned() + " " + num.as_str().unwrap_or_default();
 
-    Some(Red.paint(fin).to_string())
+        return Some(Red.paint(fin).to_string());
+    }
+    Some("".to_string())
 }
