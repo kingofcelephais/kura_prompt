@@ -24,7 +24,7 @@ fn my_prompt() -> String {
     };
 
     format!(
-        "[{uname}] <-> [{cwd}] <-> [{rust}] ",
+        "[{uname}] <-> [{cwd}]{rust} ",
         cwd = cwd,
         uname = uname,
         rust = rust
