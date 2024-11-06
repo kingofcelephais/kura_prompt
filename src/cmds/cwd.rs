@@ -3,7 +3,18 @@ use std::env;
 
 pub fn cwd() -> Option<String> {
     let path_env = env::current_dir().ok()?;
-    let path = format!("{}", path_env.display());
+    let mut path = format!("{}", path_env.display());
+    let key = "HOME";
+    let home;
+    match env::var(key) {
+        Ok(val) => home = val,
+        Err(_) => home = "".to_string(),
+    }
+
+    if path == home {
+        path = "~".to_string();
+        return Some(Red.paint(path).to_string());
+    }
 
     let split_path = path.split("/").last().unwrap_or_default();
 
