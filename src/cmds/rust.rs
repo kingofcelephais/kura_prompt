@@ -48,7 +48,7 @@ pub fn rust() -> Option<String> {
 
         let green_rust = Green.paint(fin).to_string();
 
-        return Some(" <-> [".to_owned() + &green_rust + "]");
+        return Some("[".to_owned() + &green_rust + "]");
     }
     Some("".to_string())
 }
