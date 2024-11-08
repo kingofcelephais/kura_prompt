@@ -146,28 +146,28 @@ fn build_git_status_tray(repo: &mut Repository) -> (String, String) {
     if file_stats.intersects(*STATUS_NEW) {
         let stat_symbol = "!";
         branch_color_deduced = "Yellow";
-        repo_stat += Yellow.bold().paint(&*stat_symbol).as_str();
+        repo_stat += Yellow.bold().paint(&stat_symbol).as_str();
     }
 
     if file_stats.intersects(*STATUS_UNSTAGED) {
         let stat_symbol = "±";
         branch_color_deduced = "Blue";
-        repo_stat += Red.bold().paint(&*stat_symbol).as_str();
+        repo_stat += Red.bold().paint(&stat_symbol).as_str();
     }
 
     if file_stats.intersects(*STATUS_STAGED) {
         let stat_symbol = "±";
         branch_color_deduced = "Blue";
-        repo_stat += Green.bold().paint(&*stat_symbol).as_str();
+        repo_stat += Green.bold().paint(&stat_symbol).as_str();
     }
 
     if is_stashed(repo) {
         let stat_symbol = "$";
         match branch_color_deduced {
-            "Yellow" => repo_stat += Yellow.bold().paint(&*stat_symbol).as_str(),
-            "Blue" => repo_stat += Blue.bold().paint(&*stat_symbol).as_str(),
-            "Green" => repo_stat += Green.bold().paint(&*stat_symbol).as_str(),
-            _ => repo_stat += Green.bold().paint(&*stat_symbol).as_str(),
+            "Yellow" => repo_stat += Yellow.bold().paint(&stat_symbol).as_str(),
+            "Blue" => repo_stat += Blue.bold().paint(&stat_symbol).as_str(),
+            "Green" => repo_stat += Green.bold().paint(&stat_symbol).as_str(),
+            _ => repo_stat += Green.bold().paint(&stat_symbol).as_str(),
         }
     }
 
