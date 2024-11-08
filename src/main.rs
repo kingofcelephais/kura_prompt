@@ -26,7 +26,7 @@ fn my_prompt() -> String {
     let vcs = vcs::status();
 
     format!(
-        "┏[{uname}][{cwd}]{vcs}{rust}\n┖->",
+        "┏[{uname}][{cwd}]{vcs}{rust}┖->",
         cwd = cwd,
         uname = uname,
         vcs = vcs,
