@@ -144,30 +144,34 @@ fn build_git_status_tray(repo: &mut Repository) -> (String, String) {
     let file_stats = get_repo_statuses(repo);
 
     if file_stats.intersects(*STATUS_NEW) {
-        let stat_symbol = "!";
+        let stat_symbol = "!".to_string();
         branch_color_deduced = "Yellow";
-        repo_stat += Yellow.bold().paint(&stat_symbol).as_str();
+        repo_stat = [repo_stat, Yellow.bold().paint(&stat_symbol).to_string()].concat();
     }
 
     if file_stats.intersects(*STATUS_UNSTAGED) {
-        let stat_symbol = "±";
+        let stat_symbol = "±".to_string();
         branch_color_deduced = "Blue";
-        repo_stat += Red.bold().paint(&stat_symbol).as_str();
+        repo_stat = [repo_stat, Red.bold().paint(&stat_symbol).to_string()].concat();
     }
 
     if file_stats.intersects(*STATUS_STAGED) {
-        let stat_symbol = "±";
+        let stat_symbol = "±".to_string();
         branch_color_deduced = "Blue";
-        repo_stat += Green.bold().paint(&stat_symbol).as_str();
+        repo_stat = [repo_stat, Green.bold().paint(&stat_symbol).to_string()].concat();
     }
 
     if is_stashed(repo) {
-        let stat_symbol = "$";
+        let stat_symbol = "$".to_string();
         match branch_color_deduced {
-            "Yellow" => repo_stat += Yellow.bold().paint(&stat_symbol).as_str(),
-            "Blue" => repo_stat += Blue.bold().paint(&stat_symbol).as_str(),
-            "Green" => repo_stat += Green.bold().paint(&stat_symbol).as_str(),
-            _ => repo_stat += Green.bold().paint(&stat_symbol).as_str(),
+            "Yellow" => {
+                repo_stat = [repo_stat, Yellow.bold().paint(&stat_symbol).to_string()].concat()
+            }
+            "Blue" => repo_stat = [repo_stat, Blue.bold().paint(&stat_symbol).to_string()].concat(),
+            "Green" => {
+                repo_stat = [repo_stat, Green.bold().paint(&stat_symbol).to_string()].concat()
+            }
+            _ => repo_stat = [repo_stat, Green.bold().paint(&stat_symbol).to_string()].concat(),
         }
     }
 
