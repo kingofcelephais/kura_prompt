@@ -3,6 +3,7 @@ mod cmds;
 use crate::cmds::cwd;
 use crate::cmds::rust;
 
+use cmds::vcs;
 use nu_ansi_term::Color::*;
 
 fn main() {
@@ -22,11 +23,13 @@ fn my_prompt() -> String {
         Some(r) => r,
         None => "".to_string(),
     };
+    let vcs = vcs::status();
 
     format!(
-        "[{uname}][{cwd}]{rust} ",
+        "[{uname}][{cwd}]{vcs}{rust} ",
         cwd = cwd,
         uname = uname,
+        vcs = vcs,
         rust = rust
     )
 }
